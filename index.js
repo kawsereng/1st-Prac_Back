@@ -44,9 +44,14 @@ app.delete('/delete/:id',async (req,res)=>{
 })
 
 app.post('/update/:id',async (req,res)=>{
-  let {id}=req.params
-  let update= await khata.findByIdAndUpdate({_id: id},req.body)
-  res.send('update')
+  let {id} = req.params
+  let update = await khata.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true, runValidators: true }
+    );
+  res.send(update)
+
 
 })
 

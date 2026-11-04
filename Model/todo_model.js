@@ -6,12 +6,14 @@ let todo_Schema= new Schema({
 
     taskAdd:{
         type: String,
-        require:true
+        required: true
     },
     priority:{
         type: String,
         enum:['Highlight','midorate','low'],
         default:'none'
+
+        
 
     }
 })
