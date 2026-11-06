@@ -11,6 +11,8 @@ app.use(express.json())
 mongoose.connect('mongodb+srv://iamkawsermia_db_user:y5BubgWN64vevx28@cluster0.jiyx2fq.mongodb.net/todo')
   .then(() => console.log('DataBase Connected ✅'));
 
+
+
 app.post('/todo',(req, res) => {
  let{task,prioty}= req.body;
 
@@ -26,9 +28,22 @@ app.post('/todo',(req, res) => {
  
 });
 
+// Athantication gard
+
+  function gard(req,res,next) {
+    if(req.headers.authorization == "passnai"){
+      next()
+    }
+    else { 
+      res.send('gard')
+
+    }
+    
+    
+  }
 
 // ! data base Thekey Data ana 
-app.get('/todo/creat', async (req,res) => {
+app.get('/todo/all',gard, async (req,res) => {
 
 let data = await khata.find({ })
 
